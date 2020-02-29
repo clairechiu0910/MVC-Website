@@ -1,0 +1,71 @@
+﻿@model aspnetmvc2_ska.Models.Product
+@{
+    ViewBag.Title = "CreateProduct";
+    bool? IsCreateProductSuccessful = (bool?) TempData["IsCreateProductSuccessful"];
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (IsCreateProductSuccessful == true)
+{
+    <script>
+        alert("Create new product successfully.");
+    </script>
+}
+
+<div class="well">
+    @using (Html.BeginForm("ReceiveNewProduct", "Home", FormMethod.Post))
+    {
+        <div class="text-danger">
+            @Html.ValidationSummary()
+        </div>
+        <div class="form-group row">
+            @Html.Label(nameof(Model.ProductName), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.ProductName, new { @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.SupplierID), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.SupplierID, new { @type = "number", min = 1, @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.CategoryID), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.CategoryID, new { @type = "number", min = 1, @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.QuantityPerUnit), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.QuantityPerUnit, new { @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.UnitPrice), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.UnitPrice, new { @type = "number", min = 0, @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.UnitsInStock), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.UnitsInStock, new { @type = "number", min = 0, @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.UnitsOnOrder), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.UnitsOnOrder, new { @type = "number", min = 0, @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.ReorderLevel), new { @class = "col-sm-2 control-label" })
+            @Html.TextBoxFor(model => model.ReorderLevel, new { @type = "number", min = 0, @class = "col-sm-10" })
+        </div>
+
+        <div class="form-group row">
+            @Html.Label(nameof(Model.Discontinued), new { @class = "col-sm-2 control-label" })
+            @Html.CheckBoxFor(model => model.Discontinued)
+        </div>
+
+        <div class="form-group row">
+            <button type="submit" class="btn btn-default"> Submit </button>
+        </div>
+    }
+</div>

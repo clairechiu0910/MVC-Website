@@ -15,22 +15,36 @@ namespace aspnetmvc2_ska.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+        
+        public ActionResult CreateProduct()
+        {
+            ModelState.Clear();
+            var newProduct = new Product
+            {
+
+            };
+            return View(newProduct);
+        }
+
+        public ActionResult ReceiveNewProduct(Product newProduct)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "hihi");
+                return View(nameof(CreateProduct));
+            }
+
+            _northwindRepo.InsertNewProduct(newProduct);
+            TempData["IsCreateProductSuccessful"] = true;
+            return Redirect("CreateProduct");
+        }
+
+        public ActionResult ViewProduct()
+        {
             List<Product> productsList = _northwindRepo.GetProductsList();
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(productsList);
         }
     }
 }

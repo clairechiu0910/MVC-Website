@@ -8,9 +8,8 @@ namespace aspnetmvc2_ska.Repositories
 {
     public class DataAccessLayer
     {
-        private static readonly string ServerName = ConfigurationManager.ConnectionStrings["Data Source=(localdb)\\localDB"].ConnectionString;
-
-
+        private static readonly string ServerName = ConfigurationManager.ConnectionStrings["Northwind"].ConnectionString;
+        
         public IEnumerable<T> Query<T>(string sql, object param = null)
         {
             var sqlConnection = new SqlConnection(ServerName);
@@ -26,15 +25,6 @@ namespace aspnetmvc2_ska.Repositories
             using (var conn = sqlConnection)
             {
                 conn.Execute(sql, param);
-            }
-        }
-
-        public int QueryReturnId(string sql, object param = null)
-        {
-            var sqlConnection = new SqlConnection(ServerName);
-            using (var conn = sqlConnection)
-            {
-                return conn.Query<int>(sql, param).Single();
             }
         }
     }
