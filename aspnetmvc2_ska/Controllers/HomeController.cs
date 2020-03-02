@@ -86,27 +86,16 @@ namespace aspnetmvc2_ska.Controllers
         [HttpPost]
         public ActionResult ApplyFilter(string searchProductName)
         {
-            List<Product> productsList = _productsRepo.GetProductsList();
+            List<Product> productsList;
             if (searchProductName != null)
             {
-                productsList = FilterProductName(productsList, searchProductName);
+                productsList = _productsRepo.GetProductsSearchName(searchProductName);
+            }
+            else
+            {
+                productsList = _productsRepo.GetProductsList();
             }
             return View("ViewProduct", productsList);
         }
-
-        private static List<Product> FilterProductName(IEnumerable<Product> productsList, string searchProductName)
-        {
-            var filteredProductsList = new List<Product>{};
-            foreach (var product in productsList)
-            {
-                if (product.ProductName.IndexOf(searchProductName, StringComparison.Ordinal) != -1)
-                {
-                    filteredProductsList.Add(product);
-                }
-            }
-
-            return filteredProductsList;
-        }
-
     }
 }
