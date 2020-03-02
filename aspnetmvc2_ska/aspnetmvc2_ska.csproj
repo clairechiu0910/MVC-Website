@@ -129,7 +129,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Repositories\CategoriesRepo.cs" />
+    <Compile Include="Repositories\SuppliersRepo.cs" />
     <Compile Include="Repositories\NorthwindRepo.cs" />
     <Compile Include="Repositories\DataAccessLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

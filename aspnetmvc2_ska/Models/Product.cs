@@ -1,6 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace aspnetmvc2_ska.Models
 {
@@ -16,10 +19,12 @@ namespace aspnetmvc2_ska.Models
         [Display(Name = "Supplier Id")]
         [Range(1, 29, ErrorMessage = "{0} must in range [{1}, {2}]")]
         public int SupplierID { get; set; }
+        public List<SelectListItem> SuppliersList { get; set; }
 
         [Display(Name = "Category Id")]
         [Range(1, 8, ErrorMessage = "{0} must in range [{1}, {2}]")]
         public int CategoryID { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
 
         public  string QuantityPerUnit { get; set; }
 
