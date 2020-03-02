@@ -12,7 +12,7 @@ namespace aspnetmvc2_ska.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly NorthwindRepo _northwindRepo = new NorthwindRepo();
+        private readonly ProductsRepo _productsRepo = new ProductsRepo();
         private readonly SuppliersRepo _suppliersRepo = new SuppliersRepo();
         private readonly CategoriesRepo _categoriesRepo = new CategoriesRepo();
 
@@ -44,15 +44,9 @@ namespace aspnetmvc2_ska.Controllers
                 return View(nameof(CreateProduct), newProduct);
             }
 
-            _northwindRepo.InsertNewProduct(newProduct);
+            _productsRepo.InsertNewProduct(newProduct);
             TempData["IsCreateProductSuccessful"] = true;
             return Redirect("CreateProduct");
-        }
-
-        public ActionResult ViewProduct()
-        {
-            List<Product> productsList = _northwindRepo.GetProductsList();
-            return View(productsList);
         }
 
         private void GetSuppliersName(Product newProduct)
@@ -82,5 +76,37 @@ namespace aspnetmvc2_ska.Controllers
                 });
             }
         }
+
+        public ActionResult ViewProduct()
+        {
+            List<Product> productsList = _productsRepo.GetProductsList();
+            return View(productsList);
+        }
+
+        [HttpPost]
+        public ActionResult ApplyFilter(string searchProductName)
+        {
+            List<Product> productsList = _productsRepo.GetProductsList();
+            if (searchProductName != null)
+            {
+                productsList = FilterProductName(productsList, searchProductName);
+            }
+            return View("ViewProduct", productsList);
+        }
+
+        private static List<Product> FilterProductName(IEnumerable<Product> productsList, string searchProductName)
+        {
+            var filteredProductsList = new List<Product>{};
+            foreach (var product in productsList)
+            {
+                if (product.ProductName.IndexOf(searchProductName, StringComparison.Ordinal) != -1)
+                {
+                    filteredProductsList.Add(product);
+                }
+            }
+
+            return filteredProductsList;
+        }
+
     }
 }

@@ -5,20 +5,13 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<hr />
 
-<!-- Contents -->
-@*<div class="col-md-8">
-    <div class="col-sm-8 col-md-6 col-lg-4">
-        <form action='@Url.Action("CurrentCourses", "Course")' method="post">
-            <div>
-                <input id="SearchString" name="SearchString" type="text">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-        </form>
-    </div>
-</div>*@
+<div style="padding-bottom: 15px; text-align: right">
+    <button class="btn btn-default" id="filter-button" data-toggle="modal" data-target="#filter-modal">Data Filter</button>
+</div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered table-hover">
     <thread>
         <tr>
             <th scope="col">
@@ -29,6 +22,9 @@
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.CategoryID)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.CategoryName)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.QuantityPerUnit)
@@ -53,35 +49,83 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.SupplierID)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.CategoryID)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.UnitPrice)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.UnitsInStock)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.ReorderLevel)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.Discontinued)
-                </td>
-            </tr>
+        <tr>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.SupplierID)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.UnitsInStock)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.ReorderLevel)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Discontinued)
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+
+<div id="filter-modal" class="modal fade" tabindex="-1">
+    <form action="@Url.Action("ApplyFilter", "Home")" method="post" enctype="multipart/form-data">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header no-padding">
+                        <div class="table-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span class="white">×</span>
+                            </button>
+                            <i class="fa fa-calculator"></i> Please Choose Data Filter
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="input-group" style="margin: 20px">
+                            <label>Product Name</label>
+                            <input type="text" id="searchProductName" name="searchProductName" class="spinbox-input form-control text-center">
+                        </div>
+                        @*<div class="input-group" style="margin: 20px">
+                            <label style="display:block" >Discontinued</label>
+                            <input type="checkbox" id="searchDiscontinued" name="searchDiscontinued">
+                        </div>*@
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-success">
+                            Apply
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        $("#filter-button").on('click',
+            function () {
+                $('#filter-modal').appendTo("body");
+            });
+    </script>
+}

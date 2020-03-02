@@ -134,7 +134,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Repositories\CategoriesRepo.cs" />
     <Compile Include="Repositories\SuppliersRepo.cs" />
-    <Compile Include="Repositories\NorthwindRepo.cs" />
+    <Compile Include="Repositories\ProductsRepo.cs" />
     <Compile Include="Repositories\DataAccessLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

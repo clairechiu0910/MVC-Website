@@ -8,15 +8,13 @@ using Microsoft.Ajax.Utilities;
 
 namespace aspnetmvc2_ska.Repositories   
 {
-    public class NorthwindRepo : DataAccessLayer
+    public class ProductsRepo : DataAccessLayer
     {
         public List<Product> GetProductsList()
         {
             return Query<Product>(
-                @"SELECT [ProductID], [ProductName], [SupplierID], [CategoryID]
-                        ,[QuantityPerUnit], [UnitPrice], [UnitsInStock], [UnitsOnOrder]
-                        ,[ReorderLevel], [Discontinued]
-                    FROM [Products]").ToList();
+                @"SELECT * 
+                        FROM [Northwind].[dbo].[Products] P LEFT JOIN [Northwind].[dbo].[Categories] S ON P.CategoryID = S.CategoryID").ToList();
         }
 
         public void InsertNewProduct(Product newProduct)
