@@ -47,8 +47,8 @@
         </tr>
     </thread>
     <tbody>
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
         <tr>
             <td scope="row">
                 @Html.DisplayFor(modelItem => item.ProductName)
@@ -81,45 +81,11 @@
                 @Html.DisplayFor(modelItem => item.Discontinued)
             </td>
         </tr>
-        }
+    }
     </tbody>
 </table>
 
-<div id="filter-modal" class="modal fade" tabindex="-1">
-    <form action="@Url.Action("ApplyFilter", "Home")" method="post" enctype="multipart/form-data">
-        <div class="vertical-alignment-helper">
-            <div class="modal-dialog vertical-align-center">
-                <div class="modal-content">
-                    <div class="modal-header no-padding">
-                        <div class="table-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                <span class="white">×</span>
-                            </button>
-                            <i class="fa fa-calculator"></i> Please Choose Data Filter
-                        </div>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="input-group" style="margin: 20px">
-                            <label>Product Name</label>
-                            <input type="text" id="searchProductName" name="searchProductName" class="spinbox-input form-control text-center">
-                        </div>
-                        @*<div class="input-group" style="margin: 20px">
-                            <label style="display:block" >Discontinued</label>
-                            <input type="checkbox" id="searchDiscontinued" name="searchDiscontinued">
-                        </div>*@
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-sm btn-success">
-                            Apply
-                        </button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div>
-    </form>
-</div>
+@Html.Partial("DataFilter");
 
 @section scripts{
     <script>
