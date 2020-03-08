@@ -15,12 +15,19 @@
                     <div class="modal-body">
                         <div class="input-group" style="margin: 20px">
                             <label>Product Name</label>
-                            <input type="text" id="searchProductName" name="searchProductName" class="spinbox-input form-control text-center">
+                            <input type="text" id="searchProductName" name="searchProductName" class="form-control text-center">
                         </div>
-                        @*<div class="input-group" style="margin: 20px">
-                            <label style="display:block" >Discontinued</label>
-                            <input type="checkbox" id="searchDiscontinued" name="searchDiscontinued">
-                        </div>*@
+
+                        <div class="input-group" style="margin: 20px">
+                            <label style="display: block">Category</label>
+                            @foreach (var category in Model[0].CategoryNameList)
+                            {
+                                <span>
+                                    <input type="checkbox" id="category_checkbox_@category.CategoryID" value="@category" style="display:none"/>
+                                    <button type="button" class="btn btn-default" id="category_button_@category.CategoryID" onclick="selectCategory(@category.CategoryID)" style="margin: 5px">@category.CategoryName</button>
+                                </span>
+                            }
+                        </div>
                     </div>
 
                     <div class="modal-footer">
@@ -33,3 +40,22 @@
         </div>
     </form>
 </div>
+
+<script>
+    $("button[name='categories']").click(
+        function () {
+            debugger;
+        });
+    function selectCategory(CategoryID) {
+        $('#category_checkbox_' + CategoryID).click();
+        var isChecked = $('#category_checkbox_' + CategoryID).is(':checked');
+        if (isChecked) {
+            $('#category_button_' + CategoryID).removeClass('btn-default')
+                                                 .addClass('btn-info active');
+        }
+        else {
+            $('#category_button_' + CategoryID).removeClass('btn-info active')
+                                               .addClass('btn-default');
+        }
+    }
+</script>

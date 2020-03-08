@@ -26,8 +26,8 @@ namespace aspnetmvc2_ska.Controllers
             ModelState.Clear();
             var newProduct = new Product { };
 
-            GetSuppliersName(newProduct);
-            GetCategoriesName(newProduct);
+            GetSuppliersListItem(newProduct);
+            GetCategoriesListItem(newProduct);
 
             return View(newProduct);
         }
@@ -38,8 +38,8 @@ namespace aspnetmvc2_ska.Controllers
             {
                 ModelState.AddModelError("", "hihi");
 
-                GetSuppliersName(newProduct);
-                GetCategoriesName(newProduct);
+                GetSuppliersListItem(newProduct);
+                GetCategoriesListItem(newProduct);
 
                 return View(nameof(CreateProduct), newProduct);
             }
@@ -49,7 +49,7 @@ namespace aspnetmvc2_ska.Controllers
             return Redirect("CreateProduct");
         }
 
-        private void GetSuppliersName(Product newProduct)
+        private void GetSuppliersListItem(Product newProduct)
         {
             var suppliersList = _suppliersRepo.GetSuppliersList();
             newProduct.SuppliersList = new List<SelectListItem>();
@@ -63,7 +63,7 @@ namespace aspnetmvc2_ska.Controllers
             }
         }
 
-        private void GetCategoriesName(Product newProduct)
+        private void GetCategoriesListItem(Product newProduct)
         {
             var categoriesList = _categoriesRepo.GetCategoriesList();
             newProduct.CategoryList = new List<SelectListItem>();
@@ -80,7 +80,22 @@ namespace aspnetmvc2_ska.Controllers
         public ActionResult ViewProduct()
         {
             List<Product> productsList = _productsRepo.GetProductsList();
+            GetCategoriesNameList(productsList[0]);
             return View(productsList);
+        }
+        private void GetCategoriesNameList(Product product)
+        {
+            var categoriesList = _categoriesRepo.GetCategoriesList();
+            product.CategoryNameList = new List<Categories>();
+            foreach (var category in categoriesList)
+            {
+                product.CategoryNameList.Add(
+                    new Categories()
+                    {
+                        CategoryID = category.CategoryID,
+                        CategoryName = category.CategoryName
+                    });
+            }
         }
 
         [HttpPost]

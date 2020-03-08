@@ -27,6 +27,7 @@ namespace aspnetmvc2_ska.Models
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public List<SelectListItem> CategoryList { get; set; }
+        public List<Categories> CategoryNameList { get; set; }
 
         public  string QuantityPerUnit { get; set; }
 

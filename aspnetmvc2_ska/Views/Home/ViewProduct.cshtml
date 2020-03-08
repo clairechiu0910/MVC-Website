@@ -47,50 +47,50 @@
         </tr>
     </thread>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.SupplierID)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.CategoryID)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.UnitsInStock)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.ReorderLevel)
-            </td>
-            <td scope="row">
-                @Html.DisplayFor(modelItem => item.Discontinued)
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.SupplierID)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.CategoryID)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.ReorderLevel)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.Discontinued)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
-@Html.Partial("DataFilter");
+@Html.Partial("DataFilter")
 
 @section scripts{
-    <script>
+    <script type="text/javascript">
         $("#filter-button").on('click',
-            function () {
+            function() {
                 $('#filter-modal').appendTo("body");
             });
     </script>
