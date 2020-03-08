@@ -83,6 +83,23 @@ namespace aspnetmvc2_ska.Controllers
             GetCategoriesNameList(productsList[0]);
             return View(productsList);
         }
+        
+        [HttpPost]
+        public ActionResult ApplyFilter(string searchProductName)
+        {
+            List<Product> productsList;
+            if (searchProductName != null)
+            {
+                productsList = _productsRepo.GetProductsSearchName(searchProductName);
+            }
+            else
+            {
+                productsList = _productsRepo.GetProductsList();
+            }
+
+            GetCategoriesNameList(productsList[0]);
+            return View("ViewProduct", productsList);
+        }
         private void GetCategoriesNameList(Product product)
         {
             var categoriesList = _categoriesRepo.GetCategoriesList();
@@ -96,21 +113,6 @@ namespace aspnetmvc2_ska.Controllers
                         CategoryName = category.CategoryName
                     });
             }
-        }
-
-        [HttpPost]
-        public ActionResult ApplyFilter(string searchProductName)
-        {
-            List<Product> productsList;
-            if (searchProductName != null)
-            {
-                productsList = _productsRepo.GetProductsSearchName(searchProductName);
-            }
-            else
-            {
-                productsList = _productsRepo.GetProductsList();
-            }
-            return View("ViewProduct", productsList);
         }
     }
 }
